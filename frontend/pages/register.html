@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ColdVault - Sign Up</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background: linear-gradient(135deg,
+                    #eef4ff,
+                    #f7f9fc);
+
+            padding: 30px;
+        }
+
+
+        .container {
+
+            width: 450px;
+
+            background: #fff;
+
+            padding: 40px;
+
+            border-radius: 24px;
+
+            box-shadow:
+                0 20px 45px rgba(0, 0, 0, .08);
+        }
+
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .logo-box {
+
+            width: 46px;
+
+            height: 46px;
+
+            border-radius: 14px;
+
+            background: #3b82f6;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            color: white;
+
+            font-size: 22px;
+        }
+
+
+        .logo h2 {
+
+            font-size: 34px;
+
+            font-weight: 700;
+        }
+
+
+        .logo span {
+
+            color: #2563eb;
+        }
+
+
+        h1 {
+
+            font-size: 34px;
+
+            color: #1e293b;
+        }
+
+
+        .subtitle {
+
+            margin-top: 8px;
+
+            margin-bottom: 30px;
+
+            color: #7b8794;
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+
+            color: #374151;
+        }
+
+
+        input {
+
+            width: 100%;
+
+            height: 52px;
+
+            border: 1px solid #d7dce3;
+
+            border-radius: 12px;
+
+            padding-left: 15px;
+
+            margin-bottom: 18px;
+
+            outline: none;
+
+            transition: .3s;
+
+            font-size: 15px;
+        }
+
+
+        input:focus {
+
+            border-color: #3b82f6;
+
+            box-shadow:
+                0 0 0 3px rgba(59, 130, 246, .15);
+        }
+
+
+        button {
+
+            width: 100%;
+
+            height: 54px;
+
+            border: none;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(to right,
+                    #2563eb,
+                    #60a5fa);
+
+            color: white;
+
+            font-size: 18px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            margin-top: 10px;
+
+            transition: .3s;
+        }
+
+
+        button:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px rgba(37, 99, 235, .25);
+        }
+
+
+        button:disabled {
+
+            opacity: 0.7;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+
+        .footer {
+
+            margin-top: 25px;
+
+            text-align: center;
+
+            color: #777;
+        }
+
+
+        .footer a {
+
+            text-decoration: none;
+
+            color: #2563eb;
+
+            font-weight: 600;
+        }
+
+
+        .footer a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        .error-box {
+
+            background: #fee2e2;
+
+            color: #b91c1c;
+
+            border: 1px solid #fecaca;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+            font-size: 14px;
+        }
+
+
+        .success-box {
+
+            background: #dcfce7;
+
+            color: #15803d;
+
+            border: 1px solid #bbf7d0;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+            font-size: 14px;
+        }
+
+
+        .spinner {
+
+            width: 18px;
+
+            height: 18px;
+
+            border: 2px solid rgba(255, 255, 255, .4);
+
+            border-top-color: white;
+
+            border-radius: 50%;
+
+            display: inline-block;
+
+            animation: spin .7s linear infinite;
+        }
+
+
+        @keyframes spin {
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="container">
+
+
+        <!-- Logo -->
+
+        <div class="logo">
+
+            <div class="logo-box">
+                ❄
+            </div>
+
+            <h2>
+                COLD<span>VAULT</span>
+            </h2>
+
+        </div>
+
+
+        <!-- Heading -->
+
+        <h1>
+            Create Account
+        </h1>
+
+
+        <p class="subtitle">
+            Register to access the ColdVault dashboard
+        </p>
+
+
+        <!-- Error message -->
+
+        <div id="errorBox" class="error-box" style="display: none;">
+
+            <span id="errorMessage"></span>
+
+        </div>
+
+
+        <!-- Success message -->
+
+        <div id="successBox" class="success-box" style="display: none;">
+
+            <span id="successMessage"></span>
+
+        </div>
+
+
+        <!-- Registration Form -->
+
+        <form id="registerForm">
+
+
+            <!-- Full Name -->
+
+            <label for="name">
+                Full Name
+            </label>
+
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+
+            <!-- Email -->
+
+            <label for="email">
+                Email
+            </label>
+
+            <input type="email" id="email" name="email" placeholder="Enter your email" autocomplete="email" required>
+
+
+            <!-- Cold Storage Name -->
+
+            <label for="name_of_cold_storage">
+                Cold Storage Name
+            </label>
+
+            <input type="text" id="name_of_cold_storage" name="name_of_cold_storage"
+                placeholder="Enter cold storage name" required>
+
+
+            <!-- Password -->
+
+            <label for="password">
+                Password
+            </label>
+
+            <input type="password" id="password" name="password" placeholder="Create password"
+                autocomplete="new-password" required>
+
+
+            <!-- Confirm Password -->
+
+            <label for="confirm_password">
+                Confirm Password
+            </label>
+
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password"
+                autocomplete="new-password" required>
+
+
+            <!-- Submit -->
+
+            <button type="submit" id="submitBtn">
+
+                <span id="submitLabel">
+                    Create Account →
+                </span>
+
+            </button>
+
+
+        </form>
+
+
+        <!-- Login link -->
+
+        <div class="footer">
+
+            Already have an account?
+
+            <a href="login.html">
+                Sign In
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <script>
+
+
+        // FastAPI backend URL
+
+        const API_URL =
+            "http://127.0.0.1:8000";
+
+
+        // Get HTML elements
+
+        const registerForm =
+            document.getElementById("registerForm");
+
+
+        const nameInput =
+            document.getElementById("name");
+
+
+        const emailInput =
+            document.getElementById("email");
+
+
+        const storageInput =
+            document.getElementById(
+                "name_of_cold_storage"
+            );
+
+
+        const passwordInput =
+            document.getElementById("password");
+
+
+        const confirmPasswordInput =
+            document.getElementById(
+                "confirm_password"
+            );
+
+
+        const errorBox =
+            document.getElementById("errorBox");
+
+
+        const errorMessage =
+            document.getElementById("errorMessage");
+
+
+        const successBox =
+            document.getElementById("successBox");
+
+
+        const successMessage =
+            document.getElementById("successMessage");
+
+
+        const submitBtn =
+            document.getElementById("submitBtn");
+
+
+        const submitLabel =
+            document.getElementById("submitLabel");
+
+
+
+        // Show error
+
+        function showError(message) {
+
+            errorMessage.textContent = message;
+
+            errorBox.style.display = "block";
+
+            successBox.style.display = "none";
+
+        }
+
+
+
+        // Show success
+
+        function showSuccess(message) {
+
+            successMessage.textContent = message;
+
+            successBox.style.display = "block";
+
+            errorBox.style.display = "none";
+
+        }
+
+
+
+        // Hide messages
+
+        function hideMessages() {
+
+            errorBox.style.display = "none";
+
+            successBox.style.display = "none";
+
+        }
+
+
+
+        // Form submit
+
+        registerForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                // Stop normal form submission
+
+                event.preventDefault();
+
+
+                // Remove old messages
+
+                hideMessages();
+
+
+                // Get values
+
+                const name =
+                    nameInput.value.trim();
+
+
+                const email =
+                    emailInput.value.trim();
+
+
+                const nameOfColdStorage =
+                    storageInput.value.trim();
+
+
+                const password =
+                    passwordInput.value;
+
+
+                const confirmPassword =
+                    confirmPasswordInput.value;
+
+
+
+                // Frontend validation
+
+                if (!name) {
+
+                    showError(
+                        "Please enter your full name."
+                    );
+
+                    return;
+                }
+
+
+                if (!email) {
+
+                    showError(
+                        "Please enter your email."
+                    );
+
+                    return;
+                }
+
+
+                if (!nameOfColdStorage) {
+
+                    showError(
+                        "Please enter your cold storage name."
+                    );
+
+                    return;
+                }
+
+
+                if (!password) {
+
+                    showError(
+                        "Please enter a password."
+                    );
+
+                    return;
+                }
+
+
+                if (password.length < 6) {
+
+                    showError(
+                        "Password must be at least 6 characters."
+                    );
+
+                    return;
+                }
+
+
+                // Confirm password
+
+                if (password !== confirmPassword) {
+
+                    showError(
+                        "Passwords do not match."
+                    );
+
+                    return;
+                }
+
+
+
+                // Loading state
+
+                submitBtn.disabled = true;
+
+                submitLabel.innerHTML = `
+                <span class="spinner"></span>
+                Creating account...
+            `;
+
+
+
+                try {
+
+
+                    // Send request to FastAPI
+
+                    const response = await fetch(
+                        `${API_URL}/auth/register`,
+                        {
+
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                name: name,
+
+                                email: email,
+
+                                name_of_cold_storage:
+                                    nameOfColdStorage,
+
+                                password: password
+
+                            })
+
+                        }
+                    );
+
+
+
+                    // Convert response to JSON
+
+                    const data =
+                        await response.json();
+
+
+
+                    // FastAPI error
+
+                    if (!response.ok) {
+
+                        if (response.status === 400) {
+
+                            throw new Error(
+                                data.detail ||
+                                "Email already registered."
+                            );
+
+                        }
+
+
+                        throw new Error(
+                            data.detail ||
+                            "Registration failed."
+                        );
+
+                    }
+
+
+
+                    // Registration successful
+
+                    showSuccess(
+                        "Account created successfully! Redirecting to login..."
+                    );
+
+
+
+                    // Wait 1.5 seconds
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "login.html";
+
+                        },
+                        1500
+                    );
+
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "Registration error:",
+                        error
+                    );
+
+
+                    showError(
+                        error.message ||
+                        "Unable to connect to server."
+                    );
+
+                }
+                finally {
+
+                    submitBtn.disabled = false;
+
+                    submitLabel.textContent =
+                        "Create Account →";
+
+                }
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>

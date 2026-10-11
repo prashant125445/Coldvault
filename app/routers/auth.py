@@ -6,7 +6,7 @@ from app.schemas.users import (
     UserResponse
 )
 from app.core.database import get_db
-from app.core.security import create_access_token
+from app.core.security import create_access_token, get_current_user
 from app.models.users import User
 from app.schemas.users import UserCreate, UserResponse
 from app.service.users_service import (
@@ -45,7 +45,11 @@ def register(
     return user
 
 
-
+@router.get("/me", response_model=UserResponse)
+def get_me(
+    current_user: User = Depends(get_current_user)
+):
+    return current_user
 
 # -----------------------------
 # Login Manager

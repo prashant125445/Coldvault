@@ -12,6 +12,12 @@ router = APIRouter(
     tags=["Chambers"]
 )
 
+@router.get("/")
+def get_chambers(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    return db.query(Chamber).all()
 
 @router.post("/", response_model=ChamberResponse)
 def create_chamber(

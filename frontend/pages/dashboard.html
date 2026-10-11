@@ -1,0 +1,2013 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ColdVault | Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+    <style>
+        :root {
+
+            --sidebar-w: 260px;
+
+            --blue: #4f63f0;
+            --blue-dark: #3448d6;
+
+            --green: #16a34a;
+            --purple: #7c3aed;
+            --orange: #ea9a1f;
+
+            --ink: #1c2333;
+            --muted: #7a8296;
+
+            --border: #e7e9f0;
+
+            --bg: #f5f6fa;
+
+            --card: #ffffff;
+
+            --radius: 16px;
+        }
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                "Inter",
+                "Segoe UI",
+                system-ui,
+                sans-serif;
+
+            background: var(--bg);
+
+            color: var(--ink);
+        }
+
+
+        .layout {
+
+            display: flex;
+
+            min-height: 100vh;
+        }
+
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+
+            width: var(--sidebar-w);
+
+            background: #fff;
+
+            border-right: 1px solid var(--border);
+
+            padding: 24px 18px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            flex-shrink: 0;
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 0 6px 24px;
+
+            font-weight: 800;
+
+            font-size: 18px;
+        }
+
+
+        .brand .logo {
+
+            width: 34px;
+
+            height: 34px;
+
+            border-radius: 9px;
+
+            background:
+                linear-gradient(135deg,
+                    var(--blue),
+                    var(--blue-dark));
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: white;
+        }
+
+
+        .brand .cold {
+            color: var(--ink);
+        }
+
+
+        .brand .vault {
+            color: var(--blue);
+        }
+
+
+        .nav {
+
+            list-style: none;
+
+            padding: 0;
+
+            margin: 8px 0 0;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 4px;
+        }
+
+
+        .nav a {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 11px 14px;
+
+            border-radius: 10px;
+
+            color: #4b5163;
+
+            text-decoration: none;
+
+            font-size: 15px;
+
+            font-weight: 500;
+        }
+
+
+        .nav a .left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .nav a.active {
+
+            background: #eef1ff;
+
+            color: var(--blue);
+
+            font-weight: 600;
+        }
+
+
+        .nav a:hover:not(.active) {
+
+            background: #f5f6fa;
+        }
+
+
+        .badge {
+
+            background: #fde3e3;
+
+            color: #d13c3c;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            padding: 1px 8px;
+
+            border-radius: 999px;
+        }
+
+
+        .sidebar-bottom {
+
+            margin-top: auto;
+
+            padding: 11px 14px;
+
+            color: #4b5163;
+
+            font-size: 15px;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .main {
+
+            flex: 1;
+
+            padding: 24px 36px 48px;
+
+            min-width: 0;
+        }
+
+
+        /* ================= TOPBAR ================= */
+
+        .topbar {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+            margin-bottom: 28px;
+        }
+
+
+        .search {
+
+            flex: 1;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            background: #fff;
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            padding: 12px 16px;
+
+            color: var(--muted);
+        }
+
+
+        .search input {
+
+            border: none;
+
+            outline: none;
+
+            flex: 1;
+
+            font-size: 14px;
+
+            background: transparent;
+        }
+
+
+        .kbd {
+
+            font-size: 12px;
+
+            color: var(--muted);
+
+            border: 1px solid var(--border);
+
+            border-radius: 6px;
+
+            padding: 2px 6px;
+        }
+
+
+        .clock {
+
+            text-align: right;
+
+            line-height: 1.3;
+        }
+
+
+        .clock .time {
+
+            color: var(--blue);
+
+            font-weight: 700;
+
+            font-size: 18px;
+        }
+
+
+        .clock .date {
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+
+        .icon-btn {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 10px;
+
+            border: 1px solid var(--border);
+
+            background: #fff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            position: relative;
+        }
+
+
+        .icon-btn .dot {
+
+            position: absolute;
+
+            top: -3px;
+
+            right: -3px;
+
+            background: #e03b3b;
+
+            color: #fff;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            border-radius: 999px;
+
+            width: 16px;
+
+            height: 16px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .avatar {
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 10px;
+
+            background: var(--blue);
+
+            color: #fff;
+
+            font-weight: 700;
+
+            font-size: 13px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .logout-btn {
+
+            border: 1px solid var(--border);
+
+            background: #fff;
+
+            border-radius: 10px;
+
+            padding: 10px 16px;
+
+            font-weight: 600;
+
+            font-size: 14px;
+
+            color: var(--ink);
+
+            cursor: pointer;
+        }
+
+
+        .logout-btn:hover {
+
+            background: #f5f6fa;
+        }
+
+
+        /* ================= PAGE TITLE ================= */
+
+        .page-title h1 {
+
+            margin: 0 0 6px;
+
+            font-size: 30px;
+        }
+
+
+        .page-title p {
+
+            margin: 0 0 26px;
+
+            color: var(--muted);
+
+            font-size: 15px;
+        }
+
+
+        .welcome {
+
+            color: var(--blue);
+
+            font-weight: 600;
+        }
+
+
+        /* ================= STATS ================= */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+
+            margin-bottom: 28px;
+        }
+
+
+        .stat-card {
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            padding: 20px;
+        }
+
+
+        .stat-card .head {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            letter-spacing: .6px;
+
+            text-transform: uppercase;
+
+            font-weight: 600;
+        }
+
+
+        .stat-card .icon {
+
+            width: 34px;
+
+            height: 34px;
+
+            border-radius: 9px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 16px;
+        }
+
+
+        .stat-card .value {
+
+            font-size: 34px;
+
+            font-weight: 800;
+
+            margin: 8px 0 2px;
+        }
+
+
+        .stat-card .sub {
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+
+        .blue-tint {
+
+            background: #eaeeff;
+
+            color: var(--blue);
+        }
+
+
+        .green-tint {
+
+            background: #e6f8ee;
+
+            color: var(--green);
+        }
+
+
+        .purple-tint {
+
+            background: #f2e9ff;
+
+            color: var(--purple);
+        }
+
+
+        .orange-tint {
+
+            background: #fdedd6;
+
+            color: var(--orange);
+        }
+
+
+        .value.blue {
+            color: var(--blue);
+        }
+
+
+        .value.green {
+            color: var(--green);
+        }
+
+
+        .value.purple {
+            color: var(--purple);
+        }
+
+
+        .value.orange {
+            color: var(--orange);
+        }
+
+
+        /* ================= PANEL ================= */
+
+        .panel {
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            padding: 24px;
+        }
+
+
+        .panel h2 {
+
+            margin: 0 0 18px;
+
+            font-size: 19px;
+        }
+
+
+        .chamber-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fill,
+                    minmax(260px, 1fr));
+
+            gap: 16px;
+        }
+
+
+        .chamber-card {
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            padding: 16px;
+
+            background: #fbfbfd;
+        }
+
+
+        .chamber-card .row1 {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 8px;
+        }
+
+
+        .chamber-card .code {
+
+            font-weight: 700;
+
+            font-size: 17px;
+        }
+
+
+        .status-pill {
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            padding: 4px 10px;
+
+            border-radius: 999px;
+
+            text-transform: uppercase;
+        }
+
+
+        .status-available {
+
+            background: #e6f8ee;
+
+            color: var(--green);
+        }
+
+
+        .status-nearly {
+
+            background: #fdf1d9;
+
+            color: var(--orange);
+        }
+
+
+        .status-full {
+
+            background: #fde3e3;
+
+            color: #d13c3c;
+        }
+
+
+        .chamber-card .meta {
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            margin-bottom: 14px;
+        }
+
+
+        .chamber-card .meta strong {
+
+            color: var(--ink);
+        }
+
+
+        .book-btn {
+
+            width: 100%;
+
+            padding: 10px;
+
+            border: none;
+
+            background: var(--blue);
+
+            color: white;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-weight: 600;
+        }
+
+
+        .book-btn:hover {
+
+            background: var(--blue-dark);
+        }
+
+
+        .empty-state {
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            padding: 30px;
+
+            text-align: center;
+        }
+
+
+        /* ================= MANAGER ================= */
+
+        .manager-card {
+
+            margin-top: 24px;
+
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            padding: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 16px;
+        }
+
+
+        .manager-avatar {
+
+            width: 52px;
+
+            height: 52px;
+
+            border-radius: 14px;
+
+            background: #eef1ff;
+
+            color: var(--blue);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: 800;
+
+            font-size: 18px;
+        }
+
+
+        .manager-info h3 {
+
+            margin: 0 0 4px;
+        }
+
+
+        .manager-info p {
+
+            margin: 3px 0;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+
+        /* ================= LOADING ================= */
+
+        .loading {
+
+            color: var(--muted);
+
+            text-align: center;
+
+            padding: 30px;
+        }
+
+
+        .error {
+
+            background: #fde3e3;
+
+            color: #d13c3c;
+
+            padding: 12px 16px;
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+            display: none;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1100px) {
+
+            .stats {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+        }
+
+
+        @media (max-width: 720px) {
+
+            .layout {
+
+                flex-direction: column;
+            }
+
+
+            .sidebar {
+
+                width: 100%;
+            }
+
+
+            .stats {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .topbar {
+
+                flex-wrap: wrap;
+            }
+
+
+            .main {
+
+                padding: 20px;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="layout">
+
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar">
+
+
+            <div class="brand">
+
+                <span class="logo">
+                    ❄
+                </span>
+
+                <span>
+                    <span class="cold">COLD</span><span class="vault">VAULT</span>
+                </span>
+
+            </div>
+
+
+            <ul class="nav">
+
+
+                <li>
+
+                    <a href="index.html" class="active">
+
+                        <span class="left">
+                            🏠 Dashboard
+                        </span>
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="chambers.html">
+
+                        <span class="left">
+                            ▦ Chambers
+                        </span>
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="bookings.html">
+
+                        <span class="left">
+                            ≈ Bookings
+                        </span>
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="farmers.html">
+
+                        <span class="left">
+                            👥 Farmers
+                        </span>
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="#">
+
+                        <span class="left">
+                            ⚠ Alerts
+                        </span>
+
+                        <span class="badge">
+                            0
+                        </span>
+
+                    </a>
+
+                </li>
+
+
+                <li>
+
+                    <a href="#">
+
+                        <span class="left">
+                            ≈ Reports
+                        </span>
+
+                    </a>
+
+                </li>
+
+
+            </ul>
+
+
+            <div class="sidebar-bottom">
+                ⚙ Settings
+            </div>
+
+
+        </aside>
+
+
+
+        <!-- ================= MAIN ================= -->
+
+        <main class="main">
+
+
+            <!-- TOPBAR -->
+
+            <div class="topbar">
+
+
+                <div class="search">
+
+                    🔍
+
+                    <input type="text" placeholder="Search chambers, customers...">
+
+                    <span class="kbd">
+                        Ctrl K
+                    </span>
+
+                </div>
+
+
+                <div class="clock">
+
+                    <div class="time" id="clock-time">
+
+                        --:--:--
+
+                    </div>
+
+                    <div class="date" id="clock-date">
+
+                        ---
+
+                    </div>
+
+                </div>
+
+
+                <div class="icon-btn">
+
+                    🔔
+
+                    <span class="dot">
+                        0
+                    </span>
+
+                </div>
+
+
+                <div class="avatar" id="avatar">
+
+                    --
+
+                </div>
+
+
+                <button class="logout-btn" id="logoutBtn">
+
+                    Logout
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- PAGE TITLE -->
+
+            <div class="page-title">
+
+                <h1>
+                    Storage & Billing Dashboard
+                </h1>
+
+                <p>
+
+                    Welcome,
+                    <span class="welcome" id="managerName">
+
+                        Manager
+
+                    </span>
+
+                    ·
+
+                    <span id="storageName">
+                        Cold Storage
+                    </span>
+
+                </p>
+
+            </div>
+
+
+            <!-- ERROR -->
+
+            <div class="error" id="errorBox">
+
+            </div>
+
+
+
+            <!-- ================= STATS ================= -->
+
+            <div class="stats">
+
+
+                <div class="stat-card">
+
+                    <div class="head">
+
+                        CHAMBERS
+
+                        <span class="icon blue-tint">
+                            ▦
+                        </span>
+
+                    </div>
+
+                    <div class="value blue" id="totalChambers">
+
+                        0
+
+                    </div>
+
+                    <div class="sub">
+                        storage units
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="head">
+
+                        SLOTS AVAILABLE
+
+                        <span class="icon green-tint">
+                            □
+                        </span>
+
+                    </div>
+
+                    <div class="value green" id="availableSlots">
+
+                        0
+
+                    </div>
+
+                    <div class="sub">
+
+                        of
+
+                        <span id="totalSlots">
+                            0
+                        </span>
+
+                        total
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="head">
+
+                        BOOKED SLOTS
+
+                        <span class="icon purple-tint">
+                            👥
+                        </span>
+
+                    </div>
+
+                    <div class="value purple" id="bookedSlots">
+
+                        0
+
+                    </div>
+
+                    <div class="sub">
+                        currently occupied
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="head">
+
+                        ESTIMATED BILLING
+
+                        <span class="icon orange-tint">
+                            ₹
+                        </span>
+
+                    </div>
+
+                    <div class="value orange" id="estimatedBilling">
+
+                        ₹0
+
+                    </div>
+
+                    <div class="sub">
+                        from bookings
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ================= CHAMBERS ================= -->
+
+            <div class="panel">
+
+                <h2>
+                    Available Chambers
+                </h2>
+
+
+                <div class="chamber-grid" id="chamberGrid">
+
+                    <div class="loading">
+
+                        Loading chambers...
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= MANAGER ================= -->
+
+            <div class="manager-card">
+
+
+                <div class="manager-avatar" id="managerAvatar">
+
+                    --
+
+                </div>
+
+
+                <div class="manager-info">
+
+                    <h3 id="managerFullName">
+                        Loading...
+                    </h3>
+
+                    <p id="managerEmail">
+                        Loading...
+                    </p>
+
+                    <p>
+
+                        Cold Storage:
+
+                        <strong id="managerStorage">
+                            Loading...
+                        </strong>
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </main>
+
+    </div>
+
+
+
+    <script>
+
+
+        /* =====================================================
+           FASTAPI
+        ===================================================== */
+
+
+        const API_URL =
+            "http://127.0.0.1:8000";
+
+
+
+        /* =====================================================
+           GET JWT TOKEN
+        ===================================================== */
+
+
+        const token =
+            localStorage.getItem("access_token");
+
+
+
+        /* =====================================================
+           IF USER IS NOT LOGGED IN
+        ===================================================== */
+
+
+        if (!token) {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+
+        /* =====================================================
+           CLOCK
+        ===================================================== */
+
+
+        function updateClock() {
+
+
+            const now =
+                new Date();
+
+
+            document.getElementById(
+                "clock-time"
+            ).textContent =
+                now.toLocaleTimeString(
+                    "en-US",
+                    {
+                        hour12: true
+                    }
+                );
+
+
+            document.getElementById(
+                "clock-date"
+            ).textContent =
+                now.toLocaleDateString(
+                    "en-US",
+                    {
+                        weekday: "short",
+                        month: "short",
+                        day: "numeric"
+                    }
+                );
+
+        }
+
+
+        updateClock();
+
+
+        setInterval(
+            updateClock,
+            1000
+        );
+
+
+
+        /* =====================================================
+           GET LOGGED-IN USER
+        ===================================================== */
+
+
+        async function loadManager() {
+
+
+            try {
+
+
+                const response =
+                    await fetch(
+                        `${API_URL}/auth/me`,
+                        {
+
+                            method: "GET",
+
+                            headers: {
+
+                                "Authorization":
+                                    `Bearer ${token}`
+
+                            }
+
+                        }
+                    );
+
+
+
+                /* JWT invalid/expired */
+
+                if (response.status === 401) {
+
+                    localStorage.removeItem(
+                        "access_token"
+                    );
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+                }
+
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Unable to fetch manager details"
+                    );
+
+                }
+
+
+
+                const data =
+                    await response.json();
+
+
+
+                console.log(
+                    "Manager:",
+                    data
+                );
+
+
+
+                /* Display manager */
+
+                document.getElementById(
+                    "managerName"
+                ).textContent =
+                    data.name;
+
+
+                document.getElementById(
+                    "storageName"
+                ).textContent =
+                    data.name_of_cold_storage;
+
+
+                document.getElementById(
+                    "managerFullName"
+                ).textContent =
+                    data.name;
+
+
+                document.getElementById(
+                    "managerEmail"
+                ).textContent =
+                    data.email;
+
+
+                document.getElementById(
+                    "managerStorage"
+                ).textContent =
+                    data.name_of_cold_storage;
+
+
+
+                /* Create initials */
+
+                const initials =
+                    data.name
+                        .split(" ")
+                        .map(
+                            word =>
+                                word[0]
+                        )
+                        .join("")
+                        .substring(0, 2)
+                        .toUpperCase();
+
+
+
+                document.getElementById(
+                    "avatar"
+                ).textContent =
+                    initials;
+
+
+                document.getElementById(
+                    "managerAvatar"
+                ).textContent =
+                    initials;
+
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    error
+                );
+
+                showError(
+                    "Unable to connect to FastAPI."
+                );
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           GET CHAMBERS
+        ===================================================== */
+
+
+        async function loadChambers() {
+
+
+            try {
+
+
+                const response =
+                    await fetch(
+                        `${API_URL}/chambers/`,
+                        {
+
+                            method: "GET",
+
+                            headers: {
+
+                                "Authorization":
+                                    `Bearer ${token}`
+
+                            }
+
+                        }
+                    );
+
+
+
+                if (response.status === 401) {
+
+                    localStorage.removeItem(
+                        "access_token"
+                    );
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+                }
+
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Unable to fetch chambers"
+                    );
+
+                }
+
+
+
+                const chambers =
+                    await response.json();
+
+
+
+                console.log(
+                    "Chambers:",
+                    chambers
+                );
+
+
+
+                renderChambers(
+                    chambers
+                );
+
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    error
+                );
+
+                document.getElementById(
+                    "chamberGrid"
+                ).innerHTML = `
+
+            <div class="empty-state">
+
+                Unable to load chambers.
+
+            </div>
+
+        `;
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           DISPLAY CHAMBERS
+        ===================================================== */
+
+
+        function renderChambers(
+            chambers
+        ) {
+
+
+            const grid =
+                document.getElementById(
+                    "chamberGrid"
+                );
+
+
+            if (
+                !chambers ||
+                chambers.length === 0
+            ) {
+
+                grid.innerHTML = `
+
+            <div class="empty-state">
+
+                No chambers available.
+
+            </div>
+
+        `;
+
+                updateStats([]);
+
+                return;
+            }
+
+
+
+            grid.innerHTML = "";
+
+
+
+            chambers.forEach(
+                chamber => {
+
+
+                    let status =
+                        "available";
+
+
+                    let statusText =
+                        "Available";
+
+
+
+                    if (
+                        chamber.available_slots === 0
+                    ) {
+
+                        status =
+                            "full";
+
+                        statusText =
+                            "Full";
+
+                    }
+
+                    else if (
+                        chamber.available_slots <=
+                        chamber.total_slots * 0.2
+                    ) {
+
+                        status =
+                            "nearly";
+
+                        statusText =
+                            "Nearly Full";
+
+                    }
+
+
+
+                    const card =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    card.className =
+                        "chamber-card";
+
+
+
+                    card.innerHTML = `
+
+                <div class="row1">
+
+                    <span class="code">
+
+                        ${escapeHtml(
+                        chamber.name
+                    )}
+
+                    </span>
+
+                    <span
+                        class="status-pill
+                        status-${status}">
+
+                        ${statusText}
+
+                    </span>
+
+                </div>
+
+
+                <div class="meta">
+
+                    <strong>
+                        ${chamber.available_slots}
+                    </strong>
+
+                    of
+
+                    <strong>
+                        ${chamber.total_slots}
+                    </strong>
+
+                    slots free
+
+                    ·
+
+                    ₹${chamber.rent_per_slot}
+                    /slot
+
+                </div>
+
+
+                <button
+                    class="book-btn"
+                    onclick="
+                        openBooking(
+                            ${chamber.id}
+                        )
+                    ">
+
+                    Create Booking
+
+                </button>
+
+            `;
+
+
+                    grid.appendChild(
+                        card
+                    );
+
+                }
+            );
+
+
+
+            updateStats(
+                chambers
+            );
+
+        }
+
+
+
+        /* =====================================================
+           UPDATE STATISTICS
+        ===================================================== */
+
+
+        function updateStats(
+            chambers
+        ) {
+
+
+            const totalChambers =
+                chambers.length;
+
+
+
+            let totalSlots = 0;
+
+            let availableSlots = 0;
+
+            let bookedSlots = 0;
+
+
+
+            chambers.forEach(
+                chamber => {
+
+                    totalSlots +=
+                        Number(
+                            chamber.total_slots
+                        );
+
+                    availableSlots +=
+                        Number(
+                            chamber.available_slots
+                        );
+
+                    bookedSlots +=
+                        Number(
+                            chamber.occupied_slots
+                        );
+
+                }
+            );
+
+
+
+            document.getElementById(
+                "totalChambers"
+            ).textContent =
+                totalChambers;
+
+
+
+            document.getElementById(
+                "totalSlots"
+            ).textContent =
+                totalSlots;
+
+
+
+            document.getElementById(
+                "availableSlots"
+            ).textContent =
+                availableSlots;
+
+
+
+            document.getElementById(
+                "bookedSlots"
+            ).textContent =
+                bookedSlots;
+
+
+
+            /*
+               Billing will be connected to
+               booking API later.
+            */
+
+            document.getElementById(
+                "estimatedBilling"
+            ).textContent =
+                "₹0";
+
+        }
+
+
+
+        /* =====================================================
+           BOOKING BUTTON
+        ===================================================== */
+
+
+        function openBooking(
+            chamberId
+        ) {
+
+
+            /*
+               For now we simply redirect
+               to bookings page.
+        
+               Later we will create the
+               booking modal here.
+            */
+
+
+            window.location.href =
+                `bookings.html?chamber_id=${chamberId}`;
+
+        }
+
+
+
+        /* =====================================================
+           LOGOUT
+        ===================================================== */
+
+
+        document.getElementById(
+            "logoutBtn"
+        ).addEventListener(
+            "click",
+            function () {
+
+
+                localStorage.removeItem(
+                    "access_token"
+                );
+
+
+                window.location.href =
+                    "login.html";
+
+            }
+        );
+
+
+
+        /* =====================================================
+           ERROR
+        ===================================================== */
+
+
+        function showError(
+            message
+        ) {
+
+
+            const box =
+                document.getElementById(
+                    "errorBox"
+                );
+
+
+            box.textContent =
+                message;
+
+
+            box.style.display =
+                "block";
+
+        }
+
+
+
+        /* =====================================================
+           BASIC HTML ESCAPE
+        ===================================================== */
+
+
+        function escapeHtml(
+            value
+        ) {
+
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.textContent =
+                value;
+
+
+            return div.innerHTML;
+
+        }
+
+
+
+        /* =====================================================
+           LOAD EVERYTHING
+        ===================================================== */
+
+
+        loadManager();
+
+        loadChambers();
+
+
+    </script>
+
+
+</body>
+
+</html>
